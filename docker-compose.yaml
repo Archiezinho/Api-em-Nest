@@ -1,0 +1,11 @@
+version: '7.2'
+
+services:
+  app:
+    build: .
+    entrypoint: sh -c "npm install && npm run start:dev"
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/desktop/PortableGit/Api-em-Nest
+    command: redis-server --loglevel warning --requirepass 123
