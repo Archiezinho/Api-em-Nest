@@ -11,7 +11,7 @@ export class UsersCountService {
         private prisma: PrismaService,
         @Inject(CACHE_MANAGER) private cacheManager: Cache
         ){}
-    
+    /*
     @Interval( 5000 )
     async countUsers(){
         let offset = await this.cacheManager.get<number>('user-offset')
@@ -24,5 +24,5 @@ export class UsersCountService {
             this.cacheManager.set('user-offset', offset + this.limit)
         }
         console.log(users.length + offset)
-    }
+    }*/
 }

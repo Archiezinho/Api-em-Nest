@@ -22,15 +22,32 @@ export class UsersService {
     return user;
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.prisma.user.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id
+      }
+    });
+    if (!user) {
+      throw new Error("User dont exists");
+    }
+
+    return user;
   }
 
   async update(id: string, data: UpdateUserDto) {
+    const userExists = await this.prisma.user.findUnique({
+      where: {
+        id
+      }
+    });
+    if (!userExists) {
+      throw new Error("User dont exists");
+    }
 
     return await this.prisma.user.update({
       data,
@@ -40,7 +57,23 @@ export class UsersService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const userExists = await this.prisma.user.findUnique({
+      where: {
+        id
+      }
+    });
+    if (!userExists) {
+      throw new Error("User dont exists");
+    }
+
+    return await this.prisma.user.update({
+      data: {
+        active: false
+      },
+      where: {
+        id
+      }
+    });
   }
 }
