@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/database/PrismaService';
 
 @Injectable()
-export class UsersService {
+export class UserService {
 
   constructor(private prisma: PrismaService){}
 
@@ -15,7 +15,7 @@ export class UsersService {
       }
     });
     if (userExists) {
-      throw new Error("User alredy exists");
+      throw new Error("UAE");
     }
 
     const user = await this.prisma.user.create({data});
@@ -33,7 +33,7 @@ export class UsersService {
       }
     });
     if (!user) {
-      throw new Error("User dont exists");
+      throw new Error("UNF");
     }
 
     return user;
@@ -46,7 +46,7 @@ export class UsersService {
       }
     });
     if (!userExists) {
-      throw new Error("User dont exists");
+      throw new Error("UNF");
     }
 
     return await this.prisma.user.update({
@@ -64,7 +64,7 @@ export class UsersService {
       }
     });
     if (!userExists) {
-      throw new Error("User dont exists");
+      throw new Error("UNF");
     }
 
     return await this.prisma.user.update({
