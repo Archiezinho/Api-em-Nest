@@ -21,6 +21,10 @@ export class CatchAllErrors implements ExceptionFilter{
                 statusCode = 400;
                 message = 'User or Password Invalid';
             break;
+            case 'TI':
+                statusCode = 404;
+                message = 'Token Invalid';
+            break;
         }
 
 
